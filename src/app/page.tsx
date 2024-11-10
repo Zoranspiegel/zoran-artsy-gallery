@@ -1,5 +1,5 @@
-export default function homePage (): JSX.Element {
-  return (
-    <h1>Home</h1>
-  );
+import Gallery from './components/Gallery';
+
+export default function homePage(): JSX.Element {
+  return <Gallery />;
 }
