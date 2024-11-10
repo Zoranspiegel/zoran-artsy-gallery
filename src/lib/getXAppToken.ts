@@ -4,13 +4,18 @@ import {
   type XAppTokenType
 } from '@/models/XAppToken';
 import dbConnect from './dbConnection';
-import env from '@/env';
+import { loadEnvConfig } from '@next/env';
+
+const appDir = process.cwd();
+loadEnvConfig(appDir);
 
 async function createXAppToken(): Promise<void> {
   try {
+    if (!process.env.ARTSY_CLIENT_ID || process.env.ARTSY_CLIENT_SECRET) throw new Error('Internal Server Error');
+    
     const credentialsBody = {
-      client_id: env.ARTSY_CLIENT_ID,
-      client_secret: env.ARTSY_CLIENT_SECRET
+      client_id: process.env.ARTSY_CLIENT_ID,
+      client_secret: process.env.ARTSY_CLIENT_SECRET
     };
 
     const getTokenRes = await fetch(
