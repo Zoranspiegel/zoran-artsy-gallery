@@ -11,7 +11,8 @@ loadEnvConfig(appDir);
 
 async function createXAppToken(): Promise<void> {
   try {
-    if (!process.env.ARTSY_CLIENT_ID || process.env.ARTSY_CLIENT_SECRET) throw new Error('Internal Server Error');
+    console.log(typeof process.env.ARTSY_CLIENT_ID)
+    if (!process.env.ARTSY_CLIENT_ID || !process.env.ARTSY_CLIENT_SECRET) throw new Error('Internal Server Error: Missing Credentials');
     
     const credentialsBody = {
       client_id: process.env.ARTSY_CLIENT_ID,
