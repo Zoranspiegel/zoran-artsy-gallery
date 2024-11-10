@@ -37,8 +37,8 @@ async function createXAppToken(): Promise<void> {
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
-      throw error;
     }
+    throw error;
   }
 }
 
@@ -70,7 +70,7 @@ export default async function getXAppToken(): Promise<
 
       return newTokens[0];
     }
-    
+
     return tokens[0];
   } catch (error) {
     if (error instanceof Error) {
