@@ -6,9 +6,9 @@ async function dbConnect(): Promise<void> {
   try {
     if (connection.isConnected) return;
 
-    if (!process.env.MONGODB_URI) throw new Error('Internal Server Error');
+    if (!process.env.NEXT_PUBLIC_MONGODB_URI) throw new Error('Internal Server Error');
 
-    const db = await mongoose.connect(process.env.MONGODB_URI);
+    const db = await mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI);
 
     connection.isConnected = db.connections[0].readyState;
   } catch (error) {
