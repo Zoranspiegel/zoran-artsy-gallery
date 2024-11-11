@@ -9,18 +9,6 @@ const PaintingZodSchema = z.object({
   category: z.string(),
   medium: z.string(),
   date: z.string(),
-  dimensions: z.object({
-    in: z.object({
-      text: z.string(),
-      height: z.number(),
-      width: z.number()
-    }),
-    cm: z.object({
-      text: z.string(),
-      height: z.number(),
-      width: z.number()
-    })
-  }),
   collecting_institution: z.string(),
   image_versions: z.array(ImageVersionZodSchema),
   _links: z.object({

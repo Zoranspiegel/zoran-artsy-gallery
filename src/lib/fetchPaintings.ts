@@ -1,13 +1,17 @@
-import { PaintingsZodSchema, PaintingType, type PaintingsType } from '@/models/Paintings';
-import getXAppToken from './getXAppToken';
+import { PaintingsZodSchema, type PaintingsType } from '@/models/Paintings';
 
 export default async function fetchPaintings(url: string): Promise<PaintingsType | undefined> {
   try {
-    const xapptokens = await getXAppToken();
+    console.log('AGUA')
+    const responseToken = await fetch('/api/xapptoken');
 
-    if (!xapptokens?.token) throw new Error('Internal Server Error');
+    const token = await responseToken.json();
 
-    const xapptoken = xapptokens?.token;
+    console.log('TOKEN: ', token);
+
+    if (!token) throw new Error('Internal Server Error');
+
+    const xapptoken = token.token;
 
     const response = await fetch(url, {
       headers: {
@@ -17,9 +21,7 @@ export default async function fetchPaintings(url: string): Promise<PaintingsType
 
     if (!response.ok) throw new Error('Failed to fetch paintings');
 
-    const responseJSON = await response.json();
-
-    const paintings = { ...responseJSON, _embedded: { artworks: responseJSON._embedded.artworks.filter((artwork: PaintingType) => artwork.category === 'Painting') } };
+    const paintings = await response.json();
 
     const parsedPaintings = PaintingsZodSchema.parse(paintings);
 
