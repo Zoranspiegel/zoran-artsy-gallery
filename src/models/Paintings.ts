@@ -12,15 +12,12 @@ const PaintingZodSchema = z.object({
   collecting_institution: z.string(),
   image_versions: z.array(ImageVersionZodSchema),
   _links: z.object({
-    thumbnail: z.object({
-      href: z.string()
-    }),
     image: z.object({
       href: z.string()
     }),
     permalink: z.object({
       href: z.string()
-    }),
+    })
   })
 });
 

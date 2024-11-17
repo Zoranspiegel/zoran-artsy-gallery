@@ -4,3 +4,24 @@
   grid-auto-rows: 10px;
   margin: 2rem 5rem;
 }
+
+.observer {
+  padding: 2rem;
+}
+
+.loading {
+  text-align: center;
+  animation: flash 1s ease-in-out infinite;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
